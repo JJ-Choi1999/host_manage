@@ -48,6 +48,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    # 'middleware.req_handler.ReqHandlerMiddleware'
 ]
 
 ROOT_URLCONF = 'host_manage.urls'
