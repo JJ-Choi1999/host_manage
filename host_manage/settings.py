@@ -11,10 +11,10 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
 from pathlib import Path
+from utils.load_config import YAML_CONFIGS_INFO
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
@@ -78,11 +78,11 @@ WSGI_APPLICATION = 'host_manage.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'host_db',
-        'USER': 'root',
-        'PASSWORD': '123456',
-        'HOST': '127.0.0.1',
-        'PORT': '3306',
+        'NAME': str(YAML_CONFIGS_INFO['mysql']['name']), #'host_db',
+        'USER': str(YAML_CONFIGS_INFO['mysql']['user']), #'root',
+        'PASSWORD': str(YAML_CONFIGS_INFO['mysql']['password']), #'123456',
+        'HOST': str(YAML_CONFIGS_INFO['mysql']['host']), #'127.0.0.1',
+        'PORT': str(YAML_CONFIGS_INFO['mysql']['post']), #'3306',
     }
 }
 

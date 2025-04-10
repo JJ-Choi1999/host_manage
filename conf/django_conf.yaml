@@ -1,2 +1,9 @@
 ase:
   key: CkM6G_DpTVN0iU5C6fKDNJGojWhWmdbYn5Gp7ilAZNc=
+
+mysql:
+  name: host_db
+  user: root
+  password: 123456
+  host: 127.0.0.1
+  post: 3306

@@ -1,7 +1,7 @@
 from cryptography.fernet import Fernet
 from utils.load_config import YAML_CONFIGS_INFO
 
-key_str = YAML_CONFIGS_INFO['ase']['key']
+key_str = str(YAML_CONFIGS_INFO['ase']['key'])
 key = key_str.encode('utf-8')
 cipher = Fernet(key)
 
