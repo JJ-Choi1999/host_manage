@@ -1,10 +1,8 @@
 from cryptography.fernet import Fernet
+from utils.load_config import YAML_CONFIGS_INFO
 
-# [todo] 需要通过配置读取
-# 生成密钥（需安全保存）
-key_str = 'CkM6G_DpTVN0iU5C6fKDNJGojWhWmdbYn5Gp7ilAZNc='
+key_str = YAML_CONFIGS_INFO['ase']['key']
 key = key_str.encode('utf-8')
-print(f'key: {key}')
 cipher = Fernet(key)
 
 def encrypt_text(text: str) -> bytes:
