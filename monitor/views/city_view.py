@@ -92,7 +92,4 @@ def __filter_citys(filter_dict: dict = {}):
     if filter_dict.get('location'):
         citys = citys.filter(location__contains=filter_dict.get('location'))
 
-    if filter_dict.get('is_delete') != None:
-        citys = citys.filter(is_delete=filter_dict.get('is_delete'))
-
     return citys

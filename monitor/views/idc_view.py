@@ -95,7 +95,4 @@ def __filter_idcs(filter_dict: dict = {}):
     if filter_dict.get('address'):
         idcs = idcs.filter(address__contains=filter_dict.get('address'))
 
-    if filter_dict.get('is_delete') != None:
-        idcs = idcs.filter(is_delete=filter_dict.get('is_delete'))
-
     return idcs
