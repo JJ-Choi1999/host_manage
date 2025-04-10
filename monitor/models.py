@@ -86,3 +86,30 @@ class PasswordHistory(models.Model):
             "changed_at": datetime.strftime(self.changed_at, "%Y-%m-%d %H:%M:%S"),
             "is_delete": self.is_delete
         }
+
+class HostStatis(models.Model):
+
+    class Meta:
+        db_table = "host_statis"
+
+    city_id = models.BigIntegerField(help_text="城市关联id")
+    active_idc_ids = models.CharField(max_length=2048, help_text="正常idc关联id列表")
+    error_idc_ids = models.CharField(max_length=2048, help_text="异常idc关联id列表")
+    active_host_ids = models.CharField(max_length=2048, help_text="正常设备id列表")
+    error_host_ids = models.CharField(max_length=2048, help_text="异常设备id列表")
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    is_delete = models.BooleanField(default=False, help_text="软删除标记")
+
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "city_id": self.city_id,
+            "active_idc_ids": self.active_idc_ids,
+            "error_idc_ids": self.error_idc_ids,
+            "active_host_ids": self.active_host_ids,
+            "error_host_ids": self.error_host_ids,
+            "created_at": datetime.strftime(self.created_at, "%Y-%m-%d %H:%M:%S"),
+            "updated_at": datetime.strftime(self.updated_at, "%Y-%m-%d %H:%M:%S"),
+            "is_delete": self.is_delete
+        }
