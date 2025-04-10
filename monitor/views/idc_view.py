@@ -84,13 +84,10 @@ def __filter_idcs(filter_dict: dict = {}):
         idcs = idcs.filter(id__in=filter_dict.get('ids'))
 
     if filter_dict.get('city_id'):
-        idcs = idcs.filter(city_id=filter_dict.get('id'))
+        idcs = idcs.filter(city_id=filter_dict.get('city_id'))
 
     if filter_dict.get('city_ids'):
-        idcs = idcs.filter(city_id__in=filter_dict.get('ids'))
-
-    if filter_dict.get('province'):
-        idcs = idcs.filter(province=filter_dict.get('province'))
+        idcs = idcs.filter(city_id__in=filter_dict.get('city_ids'))
 
     if filter_dict.get('name'):
         idcs = idcs.filter(name__contains=filter_dict.get('name'))
