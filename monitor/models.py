@@ -45,16 +45,11 @@ class Host(models.Model):
     class Meta:
         db_table = "host"
 
-    STATUS_CHOICES = [
-        ('active', 'Active'),
-        ('offline', 'Offline'),
-    ]
-
     idc_id = models.BigIntegerField(help_text="主机关联id")
     hostname = models.CharField(max_length=100, unique=True)
     ip_address = models.GenericIPAddressField(unique=True)
-    status = models.CharField(max_length=10, choices=STATUS_CHOICES)
-    root_password = models.CharField(max_length=255)
+    status = models.IntegerField(help_text="状态码,0 - 异常, 1 - 正常, 其它数值待定")
+    root_password = models.CharField(max_length=1024)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     is_delete = models.BooleanField(default=False, help_text="软删除标记")
