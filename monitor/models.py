@@ -49,6 +49,7 @@ class Host(models.Model):
     ip_address = models.GenericIPAddressField(unique=True)
     status = models.IntegerField(help_text="状态码,0 - 异常, 1 - 正常, 其它数值待定")
     root_password = models.CharField(max_length=1024)
+    err_msg = models.CharField(max_length=1024)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     is_delete = models.BooleanField(default=False, help_text="软删除标记")
@@ -61,6 +62,7 @@ class Host(models.Model):
             "ip_address": self.ip_address,
             "status": self.status,
             "root_password": self.root_password,
+            "err_msg": self.err_msg,
             "created_at": datetime.strftime(self.created_at, "%Y-%m-%d %H:%M:%S"),
             "updated_at": datetime.strftime(self.updated_at, "%Y-%m-%d %H:%M:%S"),
             "is_delete": self.is_delete
