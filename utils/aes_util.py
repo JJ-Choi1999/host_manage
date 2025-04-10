@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from cryptography.fernet import Fernet
 from utils.load_config import YAML_CONFIGS_INFO
 
