@@ -33,5 +33,4 @@ def random_change_pw():
 
 @app.task
 def statis_host():
-    print(f'当前时间: {datetime.now().strftime("%Y-%m-%d %H:%M:%S")}, 开始统计主机')
-    return True
+    return requests.get(f'http://127.0.0.1:8001/monitor/host/host_statis').json()
