@@ -88,10 +88,10 @@ def __filter_hosts(filter_dict):
         hosts = hosts.filter(id__in=filter_dict.get('ids'))
 
     if filter_dict.get('idc_id'):
-        hosts = hosts.filter(idc_id=filter_dict.get('id'))
+        hosts = hosts.filter(idc_id=filter_dict.get('idc_id'))
 
     if filter_dict.get('idc_ids'):
-        hosts = hosts.filter(idc_id__in=filter_dict.get('ids'))
+        hosts = hosts.filter(idc_id__in=filter_dict.get('idc_ids'))
 
     if filter_dict.get('hostname'):
         hosts = hosts.filter(hostname=filter_dict.get('hostname'))
