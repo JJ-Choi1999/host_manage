@@ -125,7 +125,6 @@ class HttpRecord(models.Model):
     body = models.TextField()
     cost_time = models.DecimalField(max_digits=10, decimal_places=2)
     created_at = models.DateTimeField(auto_now_add=True)
-    is_delete = models.BooleanField(default=False, help_text="软删除标记")
 
     def to_dict(self):
         return {
