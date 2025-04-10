@@ -40,15 +40,15 @@ INSTALLED_APPS = [
     'monitor'
 ]
 
+# [todo] csrf 需要按照实际业务和系统调度逻辑继承重写
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
+    # 'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    # 'middleware.req_handler.ReqHandlerMiddleware'
 ]
 
 ROOT_URLCONF = 'host_manage.urls'
