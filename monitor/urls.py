@@ -5,6 +5,7 @@ from monitor.views.city_view import create_city, update_city, read_city, delete_
 from monitor.views.host_view import create_host, update_host, read_host, delete_host
 from monitor.views.idc_view import create_idc, update_idc, read_idc, delete_idc
 from monitor.views.pwh_view import create_pwh, update_pwh, read_pwh, delete_pwh
+from monitor.views.ping_view import ping_test
 
 urlpatterns = [
 
@@ -27,5 +28,7 @@ urlpatterns = [
     path(r'monitor/pwh/update_pwh', update_pwh),
     path(r'monitor/pwh/read_pwh', read_pwh),
     path(r'monitor/pwh/delete_pwh', delete_pwh),
+
+    path(r'monitor/ping_test', ping_test),
 
 ]

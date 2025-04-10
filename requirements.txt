@@ -4,3 +4,4 @@ mysqlclient==2.2.5
 # pip install --force-reinstall six
 celery==5.5.1
 redis==5.2.1
+ping3==4.0.8
