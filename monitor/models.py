@@ -1,6 +1,5 @@
 from django.db import models
-
-from django.utils.formats import date_format
+from datetime import datetime
 
 class City(models.Model):
 
@@ -62,8 +61,8 @@ class Host(models.Model):
             "ip_address": self.ip_address,
             "status": self.status,
             "root_password": self.root_password,
-            "created_at": date_format(self.created_at, "%Y-%m-%d %H:%M:%S"),
-            "updated_at": date_format(self.updated_at, "%Y-%m-%d %H:%M:%S"),
+            "created_at": datetime.strftime(self.created_at, "%Y-%m-%d %H:%M:%S"),
+            "updated_at": datetime.strftime(self.updated_at, "%Y-%m-%d %H:%M:%S"),
             "is_delete": self.is_delete
         }
 
@@ -82,6 +81,6 @@ class PasswordHistory(models.Model):
             "id": self.id,
             "host_id": self.host_id,
             "old_password": self.old_password,
-            "changed_at": date_format(self.changed_at, "%Y-%m-%d %H:%M:%S"),
+            "changed_at": datetime.strftime(self.changed_at, "%Y-%m-%d %H:%M:%S"),
             "is_delete": self.is_delete
         }
