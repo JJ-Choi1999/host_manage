@@ -5,3 +5,5 @@ mysqlclient==2.2.5
 celery==5.5.1
 redis==5.2.1
 ping3==4.0.8
+# 解决win10以上环境 celery worker 无法正常调用问题
+eventlet

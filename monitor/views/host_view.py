@@ -1,11 +1,13 @@
 # -*- coding: utf-8 -*-
 import json
+import random
+import traceback
 
 from django.db import transaction
 from django.core.paginator import Paginator
 
-from monitor.models import Host
-from utils.aes_util import encrypt_text
+from monitor.models import Host, PasswordHistory
+from utils.aes_util import encrypt_text, generate_secure_random_string
 from utils.req_handler import req_handler
 
 
@@ -114,3 +116,41 @@ def __filter_hosts(filter_dict):
         hosts = hosts.filter(updated_at__gte=updated_at_range[0], updated_at__lte=updated_at_range[1])
 
     return hosts
+
+@req_handler
+def random_change_pw(request):
+    """
+    随机修改host 密码
+    :return:
+    """
+    if request.method != 'GET':
+        raise Exception('请求方式有误')
+
+    # 使用分页随机, 适配 id 不是数字的情况
+    hosts = __filter_hosts(filter_dict={})
+    paginator = Paginator(hosts, 1)
+    count = paginator.count
+
+    if not count: return True
+
+    page = random.randint(1, count)
+    host_obj = paginator.get_page(page)[0]
+    host_id = host_obj.id
+    root_password = host_obj.root_password
+
+    try:
+        with transaction.atomic():
+            pwh_obj = PasswordHistory(
+                host_id=host_id,
+                old_password=root_password
+            )
+            pwh_obj.save()
+
+            host_obj.root_password = encrypt_text(generate_secure_random_string(10)).decode("utf-8")
+            host_obj.save()
+
+    except:
+        print(traceback.format_exc())
+        return False
+
+    return True

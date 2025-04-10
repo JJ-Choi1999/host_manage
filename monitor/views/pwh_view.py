@@ -5,7 +5,6 @@ from django.db import transaction
 from django.core.paginator import Paginator
 
 from monitor.models import PasswordHistory
-from utils.aes_util import encrypt_text, decrypt_text
 from utils.req_handler import req_handler
 
 @req_handler

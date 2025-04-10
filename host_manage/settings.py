@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
 from pathlib import Path
+
 from utils.load_config import YAML_CONFIGS_INFO
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -49,6 +50,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'middleware.http_middleware.HttpMiddleware'
 ]
 
 ROOT_URLCONF = 'host_manage.urls'
@@ -110,7 +112,7 @@ DATABASES = {
 
 LANGUAGE_CODE = 'zh-hans'
 
-# TIME_ZONE = 'UTC'
+# TIME_ZONE = 'Asia/Shanghai'
 
 USE_I18N = True
 
