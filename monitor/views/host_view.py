@@ -1,12 +1,13 @@
 # -*- coding: utf-8 -*-
 import json
 import random
+import threading
 import traceback
 
 from django.db import transaction
 from django.core.paginator import Paginator
 
-from monitor.models import Host, PasswordHistory
+from monitor.models import Host, PasswordHistory, City, IDC, HostStatis
 from utils.aes_util import encrypt_text, generate_secure_random_string
 from utils.req_handler import req_handler
 
@@ -154,3 +155,41 @@ def random_change_pw(request):
         return False
 
     return True
+
+@req_handler
+def host_statis(request):
+    t = threading.Thread(target=__host_statis)
+    t.start()
+    return t.native_id
+
+def __host_statis():
+
+    city_ids = City.objects.filter(is_delete=False).values_list("id", flat=True)
+    host_statis_objs = []
+
+    try:
+        with transaction.atomic():
+
+            for city_id in city_ids:
+                idc_ids = IDC.objects.filter(city_id=city_id, is_delete=False).values_list("id", flat=True)
+                host_obj = Host.objects.filter(idc_id__in=idc_ids, is_delete=False)
+                err_hosts = host_obj.filter(status=0)
+                active_hosts = host_obj.filter(status=1)
+
+                err_host_ids = err_hosts.values_list("id", flat=True)
+                active_host_ids = active_hosts.values_list("id", flat=True)
+                err_idc_ids = err_hosts.values_list("idc_id", flat=True).distinct()
+                active_idc_ids = active_hosts.values_list("idc_id", flat=True).distinct()
+
+                host_statis_obj = HostStatis(
+                    city_id=city_id,
+                    active_idc_ids=f'{list(active_idc_ids)}',
+                    error_idc_ids=f'{list(err_idc_ids)}',
+                    active_host_ids=f'{list(active_host_ids)}',
+                    error_host_ids=f'{list(err_host_ids)}'
+                )
+                host_statis_objs.append(host_statis_obj)
+
+            HostStatis.objects.bulk_create(host_statis_objs)
+    except:
+        print(traceback.format_exc())

@@ -113,3 +113,27 @@ class HostStatis(models.Model):
             "updated_at": datetime.strftime(self.updated_at, "%Y-%m-%d %H:%M:%S"),
             "is_delete": self.is_delete
         }
+
+class HttpRecord(models.Model):
+
+    class Meta:
+        db_table = "http_record"
+
+    host = models.CharField(max_length=100)
+    path = models.CharField(max_length=2048)
+    method = models.CharField(max_length=10)
+    body = models.TextField()
+    cost_time = models.DecimalField(max_digits=10, decimal_places=2)
+    created_at = models.DateTimeField(auto_now_add=True)
+    is_delete = models.BooleanField(default=False, help_text="软删除标记")
+
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "host": self.host,
+            "path": self.path,
+            "method": self.method,
+            "body": self.body,
+            "cost_time": self.cost_time,
+            "created_at": datetime.strftime(self.created_at, "%Y-%m-%d %H:%M:%S")
+        }
