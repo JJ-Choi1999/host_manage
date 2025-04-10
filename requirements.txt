@@ -1,3 +1,6 @@
 Django==4.1
 mysqlclient==2.2.5
+# celery 安装完后无法启动执行下面命令
+# pip install --force-reinstall six
 celery==5.5.1
+redis==5.2.1
