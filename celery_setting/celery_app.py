@@ -26,6 +26,10 @@ app.conf.beat_schedule = {
     }
 }
 
+# 启动定时任务 Worker(工作池)/beat(调度器):
+# celery -A tasks beat --loglevel=info
+# celery -A tasks worker --loglevel=info
+
 @app.task
 def random_change_pw():
     # print(f'当前时间: {datetime.now().strftime("%Y-%m-%d %H:%M:%S")}, 随机数: {str(random.randint(1, 13))}')
