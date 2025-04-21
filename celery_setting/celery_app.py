@@ -27,8 +27,8 @@ app.conf.beat_schedule = {
 }
 
 # 启动定时任务 Worker(工作池)/beat(调度器):
-# celery -A tasks beat --loglevel=info
-# celery -A tasks worker --loglevel=info
+# celery -A celery_app beat --loglevel=info
+# celery -A celery_app worker --loglevel=info
 
 @app.task
 def random_change_pw():
